@@ -3,15 +3,15 @@ session_start();
 include '../dbconnect.php';
 
 if (isset($_POST['addcategory'])) {
-  $namaalternatif = $_POST['namaalternatif'];
+  $namakategori = $_POST['namakategori'];
 
-  $tambahkat = mysqli_query($conn, "INSERT INTO alternatif (namaalternatif) values ('$namaalternatif')");
+  $tambahkat = mysqli_query($conn, "INSERT INTO kategori (namakategori) values ('$namakategori')");
   if ($tambahkat) {
     echo "
-		<meta http-equiv='refresh' content='1; url= alternatif.php'/>  ";
+		<meta http-equiv='refresh' content='1; url= kategori.php'/>  ";
   } else {
     echo "
-		 <meta http-equiv='refresh' content='1; url= alternatif.php'/> ";
+		 <meta http-equiv='refresh' content='1; url= kategori.php'/> ";
   }
 };
 ?>
@@ -23,7 +23,7 @@ if (isset($_POST['addcategory'])) {
   <meta charset="utf-8">
   <link rel="icon" type="image/png" href="../favicon.png">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
-  <title>Kelola Alternatif - Sinardunia</title>
+  <title>Kelola Kategori - Sinardunia</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="shortcut icon" type="image/png" href="assets/images/icon/favicon.ico">
   <link rel="stylesheet" href="assets/css/bootstrap.min.css">
@@ -49,6 +49,7 @@ if (isset($_POST['addcategory'])) {
   <link rel="stylesheet" href="assets/css/styles.css">
   <link rel="stylesheet" href="assets/css/responsive.css">
 
+  <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
   <script src="assets/js/vendor/modernizr-2.8.3.min.js"></script>
 </head>
 
@@ -56,12 +57,6 @@ if (isset($_POST['addcategory'])) {
   <!--[if lt IE 8]>
             <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
         <![endif]-->
-
-  <div id="preloader">
-    <div class="loader"></div>
-  </div>
-
-
   <div class="page-container">
 
     <div class="sidebar-menu">
@@ -81,7 +76,7 @@ if (isset($_POST['addcategory'])) {
                 <ul class="collapse">
                   <li><a href="jenis.php">Jenis</a></li>
                   <li><a href="kriteria.php">Kriteria</a></li>
-                  <li class="active"><a href="alternatif.php">Alternatif</a></li>
+                  <li class="active"><a href="kategori.php">Kategori</a></li>
                   <li><a href="produk.php">Produk</a></li>
                   <li><a href="pembayaran.php">Metode Pembayaran</a></li>
                 </ul>
@@ -149,26 +144,26 @@ if (isset($_POST['addcategory'])) {
             <div class="card">
               <div class="card-body">
                 <div class="d-sm-flex justify-content-between align-items-center">
-                  <h2>Daftar Alternatif</h2>
-                  <!-- <button style="margin-bottom:20px" data-toggle="modal" data-target="#myModal" class="btn btn-info col-md-2">Tambah Alternatif</button> -->
+                  <h2>Daftar Kategori</h2>
+                  <!-- <button style="margin-bottom:20px" data-toggle="modal" data-target="#myModal" class="btn btn-info col-md-2">Tambah Kategori</button> -->
                 </div>
                 <div class="data-tables datatable-dark">
                   <table id="dataTable3" class="display" style="width:100%">
                     <thead class="thead-dark">
                       <tr>
                         <th>No.</th>
-                        <th>Nama Alternatif</th>
+                        <th>Nama Kategori</th>
                       </tr>
                     </thead>
                     <tbody>
                       <?php
-                      $brgs = mysqli_query($conn, "SELECT * FROM alternatif ORDER BY idalternatif ASC");
+                      $brgs = mysqli_query($conn, "SELECT * FROM kategori ORDER BY idkategori ASC");
                       $no = 1;
                       while ($p = mysqli_fetch_array($brgs)) {
-                        $id = $p['idalternatif']; ?>
+                        $id = $p['idkategori']; ?>
                         <tr>
                           <td><?= $no++ ?></td>
-                          <td><?= $p['namaalternatif'] ?></td>
+                          <td><?= $p['namakategori'] ?></td>
                         </tr>
                       <?php } ?>
                     </tbody>
@@ -200,13 +195,13 @@ if (isset($_POST['addcategory'])) {
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
-          <h4 class="modal-title">Tambah Alternatif</h4>
+          <h4 class="modal-title">Tambah Kategori</h4>
         </div>
         <div class="modal-body">
           <form method="post">
             <div class="form-group">
-              <label>Nama Alternatif</label>
-              <input name="namaalternatif" type="text" class="form-control" required autofocus>
+              <label>Nama Kategori</label>
+              <input name="namakategori" type="text" class="form-control" required autofocus>
             </div>
 
         </div>
@@ -229,9 +224,6 @@ if (isset($_POST['addcategory'])) {
       });
     });
   </script>
-
-
-  <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
 
   <script src="assets/js/popper.min.js"></script>
   <script src="assets/js/bootstrap.min.js"></script>

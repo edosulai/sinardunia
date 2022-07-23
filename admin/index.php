@@ -41,6 +41,7 @@ $itungtrans3 = $itungtrans2['jumlahtrans'];
     <link rel="stylesheet" href="assets/css/styles.css">
     <link rel="stylesheet" href="assets/css/responsive.css">
 
+    <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
     <script src="assets/js/vendor/modernizr-2.8.3.min.js"></script>
 </head>
 
@@ -48,11 +49,6 @@ $itungtrans3 = $itungtrans2['jumlahtrans'];
     <!--[if lt IE 8]>
             <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
         <![endif]-->
-
-    <div id="preloader">
-        <div class="loader"></div>
-    </div>
-
 
     <div class="page-container">
 
@@ -73,7 +69,7 @@ $itungtrans3 = $itungtrans2['jumlahtrans'];
                                 <ul class="collapse">
                                     <li><a href="jenis.php">Jenis</a></li>
                                     <li><a href="kriteria.php">Kriteria</a></li>
-                                    <li><a href="alternatif.php">Alternatif</a></li>
+                                    <li><a href="kategori.php">Kategori</a></li>
                                     <li><a href="produk.php">Produk</a></li>
                                     <li><a href="pembayaran.php">Metode Pembayaran</a></li>
                                 </ul>
@@ -130,30 +126,6 @@ $itungtrans3 = $itungtrans2['jumlahtrans'];
                     </div>
                 </div>
             </div>
-
-
-
-            <?php
-            /*
-				$periksa_bahan=mysqli_query($conn,"SELECT * FROM stock_brg WHERE stock <10");
-				while($p=mysqli_fetch_array($periksa_bahan)){	
-					if($p['stock']>=1){	
-						?>	
-						<script>
-							$(document).ready(function(){
-								$('#pesan_sedia').css("color","white");
-								$('#pesan_sedia').append("<i class='ti-flag'></i>");
-							});
-						</script>
-						<?php
-						echo "<div class='alert alert-danger alert-dismissible fade show'><button type='button' class='close' data-dismiss='alert'>&times;</button>Stok  <strong><u>".$p['nama']. "</u> <u>".($p['jenis'])."</u></strong> yang tersisa kurang dari 10</div>";		
-					}
-				}
-				
-				*/
-            ?>
-
-
 
             <div class="main-content-inner">
 
@@ -252,8 +224,8 @@ $itungtrans3 = $itungtrans2['jumlahtrans'];
     </div>
 
 
-
-    <script src="assets/js/vendor/jquery-2.2.4.min.js"></script>
+<!-- 
+    <script src="assets/js/vendor/jquery-2.2.4.min.js"></script> -->
 
     <script src="assets/js/popper.min.js"></script>
     <script src="assets/js/bootstrap.min.js"></script>

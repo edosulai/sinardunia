@@ -139,9 +139,9 @@ $s = $_POST['Search'];
 										<ul class="multi-column-dropdown">
 											<h6>Kategori</h6>
 											<?php
-											$kat = mysqli_query($conn, "SELECT * FROM jenis ORDER BY namajenis ASC");
+											$kat = mysqli_query($conn, "SELECT * FROM kategori ORDER BY namakategori ASC");
 											while ($p = mysqli_fetch_array($kat)) { ?>
-												<li><a href="jenis.php?id=<?= $p['idjenis'] ?>"><?= $p['namajenis'] ?></a></li>
+												<li><a href="kategori.php?id=<?= $p['idkategori'] ?>"><?= $p['namakategori'] ?></a></li>
 											<?php } ?>
 										</ul>
 									</div>
@@ -173,9 +173,9 @@ $s = $_POST['Search'];
 					<h2>Categories</h2>
 					<ul class="cate">
 						<?php
-						$kat = mysqli_query($conn, "SELECT * FROM jenis ORDER BY namajenis ASC");
+						$kat = mysqli_query($conn, "SELECT * FROM kategori ORDER BY namakategori ASC");
 						while ($p = mysqli_fetch_array($kat)) { ?>
-							<li><a href="jenis.php?id=<?= $p['idjenis'] ?>"><i class="fa fa-arrow-right" aria-hidden="true"></i><?= $p['namajenis'] ?></a></li>
+							<li><a href="kategori.php?id=<?= $p['idkategori'] ?>"><i class="fa fa-arrow-right" aria-hidden="true"></i><?= $p['namakategori'] ?></a></li>
 						<?php } ?>
 					</ul>
 				</div>
@@ -183,99 +183,7 @@ $s = $_POST['Search'];
 			<div class="col-md-8 products-right">
 				<div class="agile_top_brands_grids">
 					<?php
-					$produk = mysqli_query($conn, "SELECT * FROM produk WHERE namaproduk like '%$s%' or deskripsi like '%$s%' LIMIT 1") or die(mysqli_error($conn)());
-					if (0 < mysqli_num_rows($produk)) {
-						$produk = mysqli_fetch_array($produk);
-
-						$jenis = mysqli_query($conn, "SELECT * FROM jenis WHERE idjenis='" . $produk['idjenis'] . "'") or die(mysqli_error($conn)());
-						$jenis = mysqli_fetch_array($jenis);
-
-						include 'algoritma.php';
-
-						$ahp = new AHP();
-
-						$kriteria = [];
-						$sql_kriteria = mysqli_query($conn, "SELECT * FROM kriteria");
-						while ($row = mysqli_fetch_array($sql_kriteria)) {
-							if (in_array($row['idkriteria'], json_decode($jenis['ahpparam'])->kriteria)) {
-								$kriteria[] = $row;
-							}
-						}
-
-						$alternatif = [];
-						$sql_alternatif = mysqli_query($conn, "SELECT * FROM alternatif");
-						while ($row = mysqli_fetch_array($sql_alternatif)) {
-							if (in_array($row['idalternatif'], json_decode($jenis['ahpparam'])->alternatif)) {
-								$alternatif[] = $row;
-							}
-						}
-
-						$ahp->setCriterias(array_map(function ($each) {
-							return $each['namakriteria'];
-						}, $kriteria), false);
-
-						$ahp->setCandidates(array_map(function ($each) {
-							return $each['idalternatif'];
-						}, $alternatif));
-
-						$ahp->setIr([
-							0.00,
-							0.00,
-							0.58,
-							0.90,
-							1.12,
-							1.24,
-							1.32,
-							1.41,
-							1.45,
-							1.49
-						]);
-
-						$kriteria_input = [];
-						for ($j = 0; $j < count($kriteria); $j++) {
-							for ($k = 0; $k < count($kriteria); $k++) {
-								$id = $kriteria[$j]['idkriteria'] . "-" . $kriteria[$k]['idkriteria'];
-
-								if ($j == $k) {
-									$kriteria_input[$j][] = 1;
-								} else if (isset(json_decode($jenis['ahpsetting'], true)[$id])) {
-									$value_abs = abs((int) json_decode($jenis['ahpsetting'], true)[$id]) + 1;
-									$kriteria_input[$j][] = json_decode($jenis['ahpsetting'], true)[$id] > 0 ? ($value_abs / 10) : $value_abs;
-								} else {
-									$kriteria_input[$j][] = null;
-								}
-							}
-						}
-
-						$ahp->setRelativeInterestMatrix($kriteria_input);
-
-						$alternatif_input = [];
-						foreach ($kriteria as $krit) {
-							for ($j = 0; $j < count($alternatif); $j++) {
-								for ($k = 0; $k < count($alternatif); $k++) {
-									$id = $krit['idkriteria'] . "-" . $alternatif[$j]['idalternatif'] . "-" . $alternatif[$k]['idalternatif'];
-
-									if ($j == $k) {
-										$alternatif_input[$krit['namakriteria']][$j][] = 1;
-									} else if (isset(json_decode($jenis['ahpsetting'], true)[$id])) {
-										$value_abs = abs((int) json_decode($jenis['ahpsetting'], true)[$id]) + 1;
-										$alternatif_input[$krit['namakriteria']][$j][] = json_decode($jenis['ahpsetting'], true)[$id] > 0 ? ($value_abs / 10) : $value_abs;
-									} else {
-										$alternatif_input[$krit['namakriteria']][$j][] = null;
-									}
-								}
-							}
-						}
-
-						$ahp->setBatchCriteriaPairWise($alternatif_input);
-
-						$ahp->finalize();
-
-						$sorted = implode(",", array_map(function ($each) {
-							return (int) $each['name'];
-						}, $ahp->getRank()));
-
-						$brgs = mysqli_query($conn, "SELECT * FROM produk WHERE idjenis='" . $produk['idjenis'] . "' ORDER BY FIELD(idjenis, $sorted)");
+						$brgs = mysqli_query($conn, "SELECT * FROM produk WHERE idkategori='$produk[idkategori]'");
 						$x = mysqli_num_rows($brgs);
 
 						if ($x > 0) {

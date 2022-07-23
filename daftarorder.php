@@ -11,7 +11,7 @@ $uid = $_SESSION['id'];
 $caricart = mysqli_query($conn, "SELECT * FROM cart WHERE userid='$uid' and status='Cart'");
 $fetc = mysqli_fetch_array($caricart);
 $orderidd = @$fetc['orderid'];
-$itungtrans = mysqli_query($conn, "select count(orderid) as jumlahtrans from cart WHERE userid='$uid' and status!='Cart'");
+$itungtrans = mysqli_query($conn, "SELECT count(orderid) as jumlahtrans from cart WHERE userid='$uid' and status!='Cart'");
 $itungtrans2 = mysqli_fetch_assoc($itungtrans);
 $itungtrans3 = $itungtrans2['jumlahtrans'];
 
@@ -172,9 +172,9 @@ if (isset($_POST["update"])) {
 										<ul class="multi-column-dropdown">
 											<h6>Kategori</h6>
 											<?php
-											$kat = mysqli_query($conn, "SELECT * FROM jenis ORDER BY namajenis ASC");
+											$kat = mysqli_query($conn, "SELECT * FROM kategori ORDER BY namakategori ASC");
 											while ($p = mysqli_fetch_array($kat)) { ?>
-												<li><a href="jenis.php?id=<?= $p['idjenis'] ?>"><?= $p['namajenis'] ?></a></li>
+												<li><a href="kategori.php?id=<?= $p['idkategori'] ?>"><?= $p['namakategori'] ?></a></li>
 											<?php } ?>
 										</ul>
 									</div>

@@ -5,52 +5,9 @@ include '../dbconnect.php';
 if (isset($_POST['addjenis'])) {
 
     $namajenis = $_POST['namajenis'];
-    $idkriteria = $_POST['idkriteria'];
-    $idalternatif = $_POST['idalternatif'];
+    $idkategori = $_POST['idkategori'];
 
-    $ahpparam = [
-        "kriteria" => array_map('intval', $idkriteria),
-        "alternatif" => array_map('intval', $idalternatif)
-    ];
-
-    $kriteria = [];
-    $sql_kriteria = mysqli_query($conn, "SELECT * FROM kriteria");
-    while ($row = mysqli_fetch_array($sql_kriteria)) {
-        if (in_array($row['idkriteria'], $idkriteria)) {
-            $kriteria[] = $row;
-        }
-    }
-
-    $alternatif = [];
-    $sql_alternatif = mysqli_query($conn, "SELECT * FROM alternatif");
-    while ($row = mysqli_fetch_array($sql_alternatif)) {
-        if (in_array($row['idalternatif'], $idalternatif)) {
-            $alternatif[] = $row;
-        }
-    }
-
-    $ahpsetting = [];
-
-    for ($j = 0; $j < count($kriteria); $j++) {
-        for ($k = $j + 1; $k < count($kriteria); $k++) {
-            $id = $kriteria[$j]['idkriteria'] . "-" . $kriteria[$k]['idkriteria'];
-            $ahpsetting['kriteria'][$id] = 0;
-        }
-    }
-
-    foreach ($kriteria as $krit) {
-        for ($j = 0; $j < count($alternatif); $j++) {
-            for ($k = $j + 1; $k < count($alternatif); $k++) {
-                $id = $krit['idkriteria'] . "-" . $alternatif[$j]['idalternatif'] . "-" . $alternatif[$k]['idalternatif'];
-                $ahpsetting['alternatif'][$id] = 0;
-            }
-        }
-    }
-
-    $ahpparam = json_encode($ahpparam);
-    $ahpsetting = json_encode($ahpsetting);
-
-    $tambahkat = mysqli_query($conn, "INSERT INTO jenis (namajenis, ahpparam, ahpsetting) values ('$namajenis','$ahpparam','$ahpsetting')");
+    $tambahkat = mysqli_query($conn, "INSERT INTO jenis (namajenis) values ('$namajenis')");
     if ($tambahkat) {
         echo "<meta http-equiv='refresh' content='0; url= jenis.php'/>  ";
     } else {
@@ -59,53 +16,9 @@ if (isset($_POST['addjenis'])) {
 } elseif (isset($_POST['editjenis'])) {
 
     $namajenis = $_POST['namajenis'];
-    $idkriteria = $_POST['idkriteria'];
-    $idalternatif = $_POST['idalternatif'];
     $idjenis = $_POST['idjenis'];
 
-    $ahpparam = [
-        "kriteria" => array_map('intval', $idkriteria),
-        "alternatif" => array_map('intval', $idalternatif)
-    ];
-
-    $kriteria = [];
-    $sql_kriteria = mysqli_query($conn, "SELECT * FROM kriteria");
-    while ($row = mysqli_fetch_array($sql_kriteria)) {
-        if (in_array($row['idkriteria'], $idkriteria)) {
-            $kriteria[] = $row;
-        }
-    }
-
-    $alternatif = [];
-    $sql_alternatif = mysqli_query($conn, "SELECT * FROM alternatif");
-    while ($row = mysqli_fetch_array($sql_alternatif)) {
-        if (in_array($row['idalternatif'], $idalternatif)) {
-            $alternatif[] = $row;
-        }
-    }
-
-    $ahpsetting = [];
-
-    for ($j = 0; $j < count($kriteria); $j++) {
-        for ($k = $j + 1; $k < count($kriteria); $k++) {
-            $id = $kriteria[$j]['idkriteria'] . "-" . $kriteria[$k]['idkriteria'];
-            $ahpsetting[$id] = isset($_POST[$id]) ? $_POST[$id] : 0;
-        }
-    }
-
-    foreach ($kriteria as $krit) {
-        for ($j = 0; $j < count($alternatif); $j++) {
-            for ($k = $j + 1; $k < count($alternatif); $k++) {
-                $id = $krit['idkriteria'] . "-" . $alternatif[$j]['idalternatif'] . "-" . $alternatif[$k]['idalternatif'];
-                $ahpsetting[$id] = isset($_POST[$id]) ? $_POST[$id] : 0;
-            }
-        }
-    }
-
-    $ahpparam = json_encode($ahpparam);
-    $ahpsetting = json_encode($ahpsetting);
-
-    $editkat = mysqli_query($conn, "UPDATE jenis SET namajenis='$namajenis', ahpparam='$ahpparam', ahpsetting='$ahpsetting' WHERE idjenis='$idjenis'") or die(mysqli_error($conn)());
+    $editkat = mysqli_query($conn, "UPDATE jenis SET namajenis='$namajenis' WHERE idjenis='$idjenis'") or die(mysqli_error($conn)());
     if ($editkat) {
         echo "<meta http-equiv='refresh' content='0; url= jenis.php'/>  ";
     } else {
@@ -146,6 +59,7 @@ if (isset($_POST['addjenis'])) {
     <link rel="stylesheet" href="assets/css/styles.css">
     <link rel="stylesheet" href="assets/css/responsive.css">
 
+    <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
     <script src="assets/js/vendor/modernizr-2.8.3.min.js"></script>
 </head>
 
@@ -153,11 +67,6 @@ if (isset($_POST['addjenis'])) {
     <!--[if lt IE 8]>
             <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
         <![endif]-->
-
-    <!-- <div id="preloader">
-        <div class="loader"></div>
-    </div> -->
-
 
     <div class="page-container">
 
@@ -178,7 +87,7 @@ if (isset($_POST['addjenis'])) {
                                 <ul class="collapse">
                                     <li class="active"><a href="jenis.php">Jenis</a></li>
                                     <li><a href="kriteria.php">Kriteria</a></li>
-                                    <li><a href="alternatif.php">Alternatif</a></li>
+                                    <li><a href="kategori.php">Kategori</a></li>
                                     <li><a href="produk.php">Produk</a></li>
                                     <li><a href="pembayaran.php">Metode Pembayaran</a></li>
                                 </ul>
@@ -241,22 +150,6 @@ if (isset($_POST['addjenis'])) {
                 $jenis = mysqli_query($conn, "SELECT * FROM jenis WHERE idjenis='" . $_GET['id'] . "'") or die(mysqli_error($conn)());
                 $jenis = mysqli_fetch_array($jenis);
 
-                $kriteria = [];
-                $sql_kriteria = mysqli_query($conn, "SELECT * FROM kriteria");
-                while ($row = mysqli_fetch_array($sql_kriteria)) {
-                    if (in_array($row['idkriteria'], json_decode($jenis['ahpparam'])->kriteria)) {
-                        $kriteria[] = $row;
-                    }
-                }
-
-                $alternatif = [];
-                $sql_alternatif = mysqli_query($conn, "SELECT * FROM alternatif");
-                while ($row = mysqli_fetch_array($sql_alternatif)) {
-                    if (in_array($row['idalternatif'], json_decode($jenis['ahpparam'])->alternatif)) {
-                        $alternatif[] = $row;
-                    }
-                }
-
             ?>
                 <div class="main-content-inner">
                     <div class="row mt-5 mb-5">
@@ -289,12 +182,12 @@ if (isset($_POST['addjenis'])) {
                                                 </div>
 
                                                 <div class="form-group">
-                                                    <label>Alternatif</label>
-                                                    <select multiple name="idalternatif[]" class="form-control">
+                                                    <label>Kategori</label>
+                                                    <select multiple name="idkategori[]" class="form-control">
                                                         <?php
-                                                        $det = mysqli_query($conn, "SELECT * FROM alternatif ORDER BY namaalternatif ASC") or die(mysqli_error($conn)());
+                                                        $det = mysqli_query($conn, "SELECT * FROM kategori ORDER BY namakategori ASC") or die(mysqli_error($conn)());
                                                         while ($d = mysqli_fetch_array($det)) { ?>
-                                                            <option <?= in_array($d['idalternatif'], json_decode($jenis['ahpparam'])->alternatif) ? 'selected' : '' ?> value="<?= $d['idalternatif'] ?>"><?= $d['namaalternatif'] ?></option>
+                                                            <option <?= in_array($d['idkategori'], json_decode($jenis['ahpparam'])->kategori) ? 'selected' : '' ?> value="<?= $d['idkategori'] ?>"><?= $d['namakategori'] ?></option>
                                                         <?php } ?>
                                                     </select>
                                                 </div>
@@ -353,13 +246,13 @@ if (isset($_POST['addjenis'])) {
                                                 foreach ($kriteria as $krit) { ?>
 
                                                     <div class="form-group">
-                                                        <label>Skala Alternatif <?= $krit['namakriteria'] ?></label>
+                                                        <label>Skala Kategori <?= $krit['namakriteria'] ?></label>
                                                     </div>
 
                                                     <table border="1" cellspacing="0" class="table">
                                                         <thead>
                                                             <tr>
-                                                                <td>Alternatif 1</td>
+                                                                <td>Kategori 1</td>
                                                                 <td>9</td>
                                                                 <td>8</td>
                                                                 <td>7</td>
@@ -377,23 +270,23 @@ if (isset($_POST['addjenis'])) {
                                                                 <td>7</td>
                                                                 <td>8</td>
                                                                 <td>9</td>
-                                                                <td>Alternatif 2</td>
+                                                                <td>Kategori 2</td>
                                                             </tr>
                                                         </thead>
                                                         <tbody>
                                                             <?php
-                                                            for ($j = 0; $j < count($alternatif); $j++) {
-                                                                for ($k = $j + 1; $k < count($alternatif); $k++) {
-                                                                    $id = $krit['idkriteria'] . "-" . $alternatif[$j]['idalternatif'] . "-" . $alternatif[$k]['idalternatif']; ?>
+                                                            for ($j = 0; $j < count($kategori); $j++) {
+                                                                for ($k = $j + 1; $k < count($kategori); $k++) {
+                                                                    $id = $krit['idkriteria'] . "-" . $kategori[$j]['idkategori'] . "-" . $kategori[$k]['idkategori']; ?>
                                                                     <tr>
                                                                         <td>
-                                                                            <label for="<?= $id ?>"><?= $alternatif[$j]['namaalternatif'] ?></label>
+                                                                            <label for="<?= $id ?>"><?= $kategori[$j]['namakategori'] ?></label>
                                                                         </td>
                                                                         <td width="70%" colspan="17">
                                                                             <input class="range" id="<?= $id ?>" name="<?= $id ?>" type="range" min="-8" max="8" value="<?= json_decode($jenis['ahpsetting'], true)[$id] ?>" step="1" style="width: 100%;" />
                                                                         </td>
                                                                         <td>
-                                                                            <label for="<?= $id ?>"><?= $alternatif[$k]['namaalternatif'] ?></label>
+                                                                            <label for="<?= $id ?>"><?= $kategori[$k]['namakategori'] ?></label>
                                                                         </td>
                                                                     </tr>
                                                             <?php }
@@ -439,7 +332,7 @@ if (isset($_POST['addjenis'])) {
                                                     <th>No.</th>
                                                     <th>Nama Jenis</th>
                                                     <th>Kriteria</th>
-                                                    <th>Alternatif</th>
+                                                    <th>Kategori</th>
                                                     <th>Aksi</th>
                                                 </tr>
                                             </thead>
@@ -457,11 +350,11 @@ if (isset($_POST['addjenis'])) {
                                                         }
                                                     }
 
-                                                    $alternatif = [];
-                                                    $sql_alternatif = mysqli_query($conn, "SELECT * FROM alternatif");
-                                                    while ($row = mysqli_fetch_array($sql_alternatif)) {
-                                                        if (in_array($row['idalternatif'], json_decode($p['ahpparam'])->alternatif)) {
-                                                            $alternatif[] = $row['namaalternatif'];
+                                                    $kategori = [];
+                                                    $sql_kategori = mysqli_query($conn, "SELECT * FROM kategori");
+                                                    while ($row = mysqli_fetch_array($sql_kategori)) {
+                                                        if (in_array($row['idkategori'], json_decode($p['ahpparam'])->kategori)) {
+                                                            $kategori[] = $row['namakategori'];
                                                         }
                                                     }
                                                 ?>
@@ -469,7 +362,7 @@ if (isset($_POST['addjenis'])) {
                                                         <td><?= $no++ ?></td>
                                                         <td><?= $p['namajenis'] ?></td>
                                                         <td><?= implode(",", $kriteria) ?></td>
-                                                        <td><?= implode(",", $alternatif) ?></td>
+                                                        <td><?= implode(",", $kategori) ?></td>
                                                         <td>
                                                             <a href="jenis.php?p=edit&id=<?= $p['idjenis'] ?>" class="btn btn-success">Edit</a>
                                                             <button onclick="confirm('Apakah Anda Yakin Ingin Mendelete Daftar Jenis <?= $p['namajenis'] ?>') == true ? window.location='jenis.php?p=delete&id=<?= $p['idjenis'] ?>' : false" class="btn btn-danger">Hapus</button>
@@ -523,12 +416,12 @@ if (isset($_POST['addjenis'])) {
                         </div>
 
                         <div class="form-group">
-                            <label>Alternatif</label>
-                            <select multiple name="idalternatif[]" class="form-control">
+                            <label>Kategori</label>
+                            <select multiple name="idkategori[]" class="form-control">
                                 <?php
-                                $det = mysqli_query($conn, "SELECT * FROM alternatif ORDER BY namaalternatif ASC") or die(mysqli_error($conn)());
+                                $det = mysqli_query($conn, "SELECT * FROM kategori ORDER BY namakategori ASC") or die(mysqli_error($conn)());
                                 while ($d = mysqli_fetch_array($det)) { ?>
-                                    <option value="<?= $d['idalternatif'] ?>"><?= $d['namaalternatif'] ?></option>
+                                    <option value="<?= $d['idkategori'] ?>"><?= $d['namakategori'] ?></option>
                                 <?php } ?>
                             </select>
                         </div>
@@ -554,8 +447,6 @@ if (isset($_POST['addjenis'])) {
         });
     </script>
 
-
-    <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
 
     <script src="assets/js/popper.min.js"></script>
     <script src="assets/js/bootstrap.min.js"></script>

@@ -49,6 +49,7 @@ if (isset($_POST['addcategory'])) {
     <link rel="stylesheet" href="assets/css/styles.css">
     <link rel="stylesheet" href="assets/css/responsive.css">
 
+    <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
     <script src="assets/js/vendor/modernizr-2.8.3.min.js"></script>
 </head>
 
@@ -56,11 +57,6 @@ if (isset($_POST['addcategory'])) {
     <!--[if lt IE 8]>
             <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
         <![endif]-->
-
-    <div id="preloader">
-        <div class="loader"></div>
-    </div>
-
 
     <div class="page-container">
 
@@ -81,7 +77,7 @@ if (isset($_POST['addcategory'])) {
                                 <ul class="collapse">
                                     <li><a href="jenis.php">Jenis</a></li>
                                     <li class="active"><a href="kriteria.php">Kriteria</a></li>
-                                    <li><a href="alternatif.php">Alternatif</a></li>
+                                    <li><a href="kategori.php">Kategori</a></li>
                                     <li><a href="produk.php">Produk</a></li>
                                     <li><a href="pembayaran.php">Metode Pembayaran</a></li>
                                 </ul>
@@ -229,9 +225,6 @@ if (isset($_POST['addcategory'])) {
             });
         });
     </script>
-
-
-    <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
 
     <script src="assets/js/popper.min.js"></script>
     <script src="assets/js/bootstrap.min.js"></script>

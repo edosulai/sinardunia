@@ -4,8 +4,8 @@ include '../dbconnect.php';
 
 if (isset($_POST["addproduct"])) {
 	$namaproduk = $_POST['namaproduk'];
-	$idalternatif = $_POST['idalternatif'];
-	$idjenis = $_POST['idjenis'];
+	$idkategori = $_POST['idkategori'];
+	$idkategori = $_POST['idkategori'];
 	$deskripsi = $_POST['deskripsi'];
 	$rate = $_POST['rate'];
 	$hargabefore = $_POST['hargabefore'];
@@ -25,8 +25,8 @@ if (isset($_POST["addproduct"])) {
 		if ($ukuran_file <= 5000000) {
 			if (move_uploaded_file($tmp_file, $path)) {
 
-				$query = "INSERT INTO produk (idjenis, idalternatif, namaproduk, gambar, deskripsi, rate, hargabefore, hargaafter, stok)
-			  values('$idjenis','$idalternatif','$namaproduk','$pathdb','$deskripsi','$rate','$hargabefore','$hargaafter','$stok')";
+				$query = "INSERT INTO produk (idkategori, idkategori, namaproduk, gambar, deskripsi, rate, hargabefore, hargaafter, stok)
+			  values('$idkategori','$idkategori','$namaproduk','$pathdb','$deskripsi','$rate','$hargabefore','$hargaafter','$stok')";
 				$sql = mysqli_query($conn, $query); // Eksekusi/ Jalankan query dari variabel $query
 
 				if ($sql) {
@@ -55,8 +55,8 @@ if (isset($_POST["addproduct"])) {
 
 	$idproduk = $_POST['idproduk'];
 	$namaproduk = $_POST['namaproduk'];
-	$idalternatif = $_POST['idalternatif'];
-	$idjenis = $_POST['idjenis'];
+	$idkategori = $_POST['idkategori'];
+	$idkategori = $_POST['idkategori'];
 	$deskripsi = $_POST['deskripsi'];
 	$rate = $_POST['rate'];
 	$hargabefore = $_POST['hargabefore'];
@@ -77,11 +77,11 @@ if (isset($_POST["addproduct"])) {
 			if ($ukuran_file <= 5000000) {
 				if (move_uploaded_file($tmp_file, $path)) {
 
-					// $query = "INSERT INTO produk (idjenis, idalternatif, namaproduk, gambar, deskripsi, rate, hargabefore, hargaafter)
-					// values('$idjenis','$idalternatif','$namaproduk','$pathdb','$deskripsi','$rate','$hargabefore','$hargaafter')";
+					// $query = "INSERT INTO produk (idkategori, idkategori, namaproduk, gambar, deskripsi, rate, hargabefore, hargaafter)
+					// values('$idkategori','$idkategori','$namaproduk','$pathdb','$deskripsi','$rate','$hargabefore','$hargaafter')";
 					// $sql = mysqli_query($conn, $query); // Eksekusi/ Jalankan query dari variabel $query
 
-					$sql = mysqli_query($conn, "UPDATE produk SET namaproduk='$namaproduk', idalternatif='$idalternatif', idjenis='$idjenis', deskripsi='$deskripsi', rate='$rate', hargabefore='$hargabefore', hargaafter='$hargaafter', stok='$stok' , gambar='$pathdb' WHERE idproduk='$idproduk'") or die(mysqli_error($conn)());
+					$sql = mysqli_query($conn, "UPDATE produk SET namaproduk='$namaproduk', idkategori='$idkategori', idkategori='$idkategori', deskripsi='$deskripsi', rate='$rate', hargabefore='$hargabefore', hargaafter='$hargaafter', stok='$stok' , gambar='$pathdb' WHERE idproduk='$idproduk'") or die(mysqli_error($conn)());
 					if ($sql) {
 						echo "<br><meta http-equiv='refresh' content='3; URL=produk.php'> You will be redirected to the form in 3 seconds";
 					} else {
@@ -105,7 +105,7 @@ if (isset($_POST["addproduct"])) {
 			echo "<br><meta http-equiv='refresh' content='3; URL=produk.php'> You will be redirected to the form in 3 seconds";
 		}
 	} else {
-		$sql = mysqli_query($conn, "UPDATE produk SET namaproduk='$namaproduk', idalternatif='$idalternatif', idjenis='$idjenis', deskripsi='$deskripsi', rate='$rate', hargabefore='$hargabefore', hargaafter='$hargaafter', stok='$stok' WHERE idproduk='$idproduk'") or die(mysqli_error($conn)());
+		$sql = mysqli_query($conn, "UPDATE produk SET namaproduk='$namaproduk', idkategori='$idkategori', idkategori='$idkategori', deskripsi='$deskripsi', rate='$rate', hargabefore='$hargabefore', hargaafter='$hargaafter', stok='$stok' WHERE idproduk='$idproduk'") or die(mysqli_error($conn)());
 		if ($sql) {
 			echo "<br><meta http-equiv='refresh' content='3; URL=produk.php'> You will be redirected to the form in 3 seconds";
 		} else {
@@ -150,6 +150,7 @@ if (isset($_POST["addproduct"])) {
 	<link rel="stylesheet" href="assets/css/styles.css">
 	<link rel="stylesheet" href="assets/css/responsive.css">
 
+	<script src="https://code.jquery.com/jquery-3.3.1.js"></script>
 	<script src="assets/js/vendor/modernizr-2.8.3.min.js"></script>
 </head>
 
@@ -157,11 +158,6 @@ if (isset($_POST["addproduct"])) {
 	<!--[if lt IE 8]>
             <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
         <![endif]-->
-
-	<div id="preloader">
-		<div class="loader"></div>
-	</div>
-
 
 	<div class="page-container">
 
@@ -182,7 +178,7 @@ if (isset($_POST["addproduct"])) {
 								<ul class="collapse">
 									<li><a href="jenis.php">Jenis</a></li>
 									<li><a href="kriteria.php">Kriteria</a></li>
-									<li><a href="alternatif.php">Alternatif</a></li>
+									<li><a href="kategori.php">Kategori</a></li>
 									<li class="active"><a href="produk.php">Produk</a></li>
 									<li><a href="pembayaran.php">Metode Pembayaran</a></li>
 								</ul>
@@ -268,13 +264,13 @@ if (isset($_POST["addproduct"])) {
 												<input name="namaproduk" type="text" class="form-control" required value="<?= $produk['namaproduk'] ?>">
 											</div>
 											<div class="form-group">
-												<label>Nama Alternatif</label>
-												<select name="idalternatif" class="form-control">
+												<label>Nama Kategori</label>
+												<select name="idkategori" class="form-control">
 													<?php
-													$det = mysqli_query($conn, "SELECT * FROM alternatif ORDER BY namaalternatif ASC") or die(mysqli_error($conn)());
+													$det = mysqli_query($conn, "SELECT * FROM kategori ORDER BY namakategori ASC") or die(mysqli_error($conn)());
 													while ($d = mysqli_fetch_array($det)) {
 													?>
-														<option value="<?= $d['idalternatif'] ?>" <?= $d['idalternatif'] == $produk['idalternatif'] ? 'selected' : '' ?>><?= $d['namaalternatif'] ?></option>
+														<option value="<?= $d['idkategori'] ?>" <?= $d['idkategori'] == $produk['idkategori'] ? 'selected' : '' ?>><?= $d['namakategori'] ?></option>
 													<?php
 													}
 													?>
@@ -282,12 +278,12 @@ if (isset($_POST["addproduct"])) {
 											</div>
 											<div class="form-group">
 												<label>Nama Jenis</label>
-												<select name="idjenis" class="form-control">
+												<select name="idkategori" class="form-control">
 													<?php
-													$det = mysqli_query($conn, "SELECT * FROM jenis ORDER BY namajenis ASC") or die(mysqli_error($conn)());
+													$det = mysqli_query($conn, "SELECT * FROM kategori ORDER BY namakategori ASC") or die(mysqli_error($conn)());
 													while ($d = mysqli_fetch_array($det)) {
 													?>
-														<option value="<?= $d['idjenis'] ?>" <?= $d['idjenis'] == $produk['idjenis'] ? 'selected' : '' ?>><?= $d['namajenis'] ?></option>
+														<option value="<?= $d['idkategori'] ?>" <?= $d['idkategori'] == $produk['idkategori'] ? 'selected' : '' ?>><?= $d['namakategori'] ?></option>
 													<?php
 													}
 													?>
@@ -362,15 +358,15 @@ if (isset($_POST["addproduct"])) {
 									</thead>
 									<tbody>
 										<?php
-										$brgs = mysqli_query($conn, "SELECT * FROM jenis j, alternatif a, produk p WHERE a.idalternatif=p.idalternatif and j.idjenis=p.idjenis ORDER BY idproduk ASC");
+										$brgs = mysqli_query($conn, "SELECT * FROM kategori j, kategori a, produk p WHERE a.idkategori=p.idkategori and j.idkategori=p.idkategori ORDER BY idproduk ASC");
 										$no = 1;
 										while ($p = mysqli_fetch_array($brgs)) { ?>
 											<tr>
 												<td><?= $no++ ?></td>
 												<td><img src="../<?= $p['gambar'] ?>" width="50%" \></td>
 												<td><?= $p['namaproduk'] ?></td>
-												<td><?= $p['namajenis'] ?></td>
-												<td><?= $p['namaalternatif'] ?></td>
+												<td><?= $p['namakategori'] ?></td>
+												<td><?= $p['namakategori'] ?></td>
 												<td><?= $p['deskripsi'] ?></td>
 												<td><?= $p['rate'] ?></td>
 												<td><?= $p['hargaafter'] ?></td>
@@ -419,13 +415,13 @@ if (isset($_POST["addproduct"])) {
 							<input name="namaproduk" type="text" class="form-control" required autofocus>
 						</div>
 						<div class="form-group">
-							<label>Nama Alternatif</label>
-							<select name="idalternatif" class="form-control">
+							<label>Nama Kategori</label>
+							<select name="idkategori" class="form-control">
 								<?php
-								$det = mysqli_query($conn, "SELECT * FROM alternatif ORDER BY namaalternatif ASC") or die(mysqli_error($conn)());
+								$det = mysqli_query($conn, "SELECT * FROM kategori ORDER BY namakategori ASC") or die(mysqli_error($conn)());
 								while ($d = mysqli_fetch_array($det)) {
 								?>
-									<option value="<?= $d['idalternatif'] ?>"><?= $d['namaalternatif'] ?></option>
+									<option value="<?= $d['idkategori'] ?>"><?= $d['namakategori'] ?></option>
 								<?php
 								}
 								?>
@@ -433,12 +429,12 @@ if (isset($_POST["addproduct"])) {
 						</div>
 						<div class="form-group">
 							<label>Nama Jenis</label>
-							<select name="idjenis" class="form-control">
+							<select name="idkategori" class="form-control">
 								<?php
-								$det = mysqli_query($conn, "SELECT * FROM jenis ORDER BY namajenis ASC") or die(mysqli_error($conn)());
+								$det = mysqli_query($conn, "SELECT * FROM kategori ORDER BY namakategori ASC") or die(mysqli_error($conn)());
 								while ($d = mysqli_fetch_array($det)) {
 								?>
-									<option value="<?= $d['idjenis'] ?>"><?= $d['namajenis'] ?></option>
+									<option value="<?= $d['idkategori'] ?>"><?= $d['namakategori'] ?></option>
 								<?php
 								}
 								?>
@@ -489,9 +485,6 @@ if (isset($_POST["addproduct"])) {
 			});
 		});
 	</script>
-
-
-	<script src="https://code.jquery.com/jquery-3.3.1.js"></script>
 
 	<script src="assets/js/popper.min.js"></script>
 	<script src="assets/js/bootstrap.min.js"></script>

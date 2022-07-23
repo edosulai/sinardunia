@@ -43,6 +43,7 @@ if (isset($_POST['tambah'])) {
     <link rel="stylesheet" href="assets/css/styles.css">
     <link rel="stylesheet" href="assets/css/responsive.css">
 
+    <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
     <script src="assets/js/vendor/modernizr-2.8.3.min.js"></script>
 </head>
 
@@ -54,9 +55,9 @@ if (isset($_POST['tambah'])) {
             $sql_kriteria = mysqli_query($conn, "SELECT * FROM kriteria");
             while ($row = mysqli_fetch_array($sql_kriteria)) $kriteria[] = $row;
 
-            $alternatif = [];
-            $sql_alternatif = mysqli_query($conn, "SELECT * FROM alternatif");
-            while ($row = mysqli_fetch_array($sql_alternatif)) $alternatif[] = $row; 
+            $kategori = [];
+            $sql_kategori = mysqli_query($conn, "SELECT * FROM kategori");
+            while ($row = mysqli_fetch_array($sql_kategori)) $kategori[] = $row; 
             ?>
 
             <div class="form-group">
@@ -114,13 +115,13 @@ if (isset($_POST['tambah'])) {
             foreach ($kriteria as $krit) { ?>
 
                 <div class="form-group">
-                    <label>Skala Alternatif <?= $krit['namakriteria'] ?></label>
+                    <label>Skala Kategori <?= $krit['namakriteria'] ?></label>
                 </div>
 
                 <table border="1" cellspacing="0" class="table">
                     <thead>
                         <tr>
-                            <td>Alternatif 1</td>
+                            <td>Kategori 1</td>
                             <td>9</td>
                             <td>8</td>
                             <td>7</td>
@@ -138,23 +139,23 @@ if (isset($_POST['tambah'])) {
                             <td>7</td>
                             <td>8</td>
                             <td>9</td>
-                            <td>Alternatif 2</td>
+                            <td>Kategori 2</td>
                         </tr>
                     </thead>
                     <tbody>
                         <?php
-                        for ($j = 0; $j < count($alternatif); $j++) {
-                            for ($k = $j + 1; $k < count($alternatif); $k++) {
-                                $id = $krit['idkriteria'] . "-" . $alternatif[$j]['idalternatif'] . "-" . $alternatif[$k]['idalternatif']; ?>
+                        for ($j = 0; $j < count($kategori); $j++) {
+                            for ($k = $j + 1; $k < count($kategori); $k++) {
+                                $id = $krit['idkriteria'] . "-" . $kategori[$j]['idkategori'] . "-" . $kategori[$k]['idkategori']; ?>
                                 <tr>
                                     <td>
-                                        <label for="<?= $id ?>"><?= $alternatif[$j]['namaalternatif'] ?></label>
+                                        <label for="<?= $id ?>"><?= $kategori[$j]['namakategori'] ?></label>
                                     </td>
                                     <td width="70%" colspan="17">
                                         <input class="range" id="<?= $id ?>" name="<?= $id ?>" type="range" min="-8" max="8" value="0" step="1" style="width: 100%;" />
                                     </td>
                                     <td>
-                                        <label for="<?= $id ?>"><?= $alternatif[$k]['namaalternatif'] ?></label>
+                                        <label for="<?= $id ?>"><?= $kategori[$k]['namakategori'] ?></label>
                                     </td>
                                 </tr>
                         <?php }
