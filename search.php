@@ -161,7 +161,7 @@ $s = $_POST['Search'];
 		<div class="container">
 			<ol class="breadcrumb breadcrumb1 animated wow slideInLeft" data-wow-delay=".5s">
 				<li><a href="index.php"><span class="glyphicon glyphicon-home" aria-hidden="true"></span>Beranda</a></li>
-				<li class="active">Kriteria</li>
+				<li class="active">Kategori</li>
 			</ol>
 		</div>
 	</div>

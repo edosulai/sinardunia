@@ -66,14 +66,14 @@ include 'dbconnect.php';
 					';
 					} else {
 
-						if ($_SESSION['role'] == 'Member') {
+						if (@$_SESSION['role'] == 'Member') {
 							echo '
-					<li style="color:white">Halo, ' . $_SESSION["name"] . '
+					<li style="color:white">Halo, ' . @$_SESSION["name"] . '
 					<li><a href="logout.php">Keluar?</a></li>
 					';
 						} else {
 							echo '
-					<li style="color:white">Halo, ' . $_SESSION["name"] . '
+					<li style="color:white">Halo, ' . @$_SESSION["name"] . '
 					<li><a href="admin">Admin Panel</a></li>
 					<li><a href="logout.php">Keluar?</a></li>
 					';
@@ -175,17 +175,17 @@ include 'dbconnect.php';
 									?>
 								</h5>
 								<div class="col-md-6 d-flex justify-content-end">
-									<?php if (@$_GET['v'] == 'desc') { ?> 
+									<?php if (@$_GET['v'] == 'desc') { ?>
 										<a href="index.php?v=asc" class="btn btn-warning" type="submit" name="submit" value="">
-											Sort By Harga 
+											Sort By Harga
 											<i class="fa fa-sort-desc" aria-hidden="true"></i>
 										</a>
-										<?php } else { ?> 
+									<?php } else { ?>
 										<a href="index.php?v=desc" class="btn btn-warning" type="submit" name="submit" value="">
-											Sort By Harga 
+											Sort By Harga
 											<i class="fa fa-sort-asc" aria-hidden="true"></i>
 										</a>
-										<?php } ?>
+									<?php } ?>
 								</div>
 								<div class="agile_top_brands_grids">
 

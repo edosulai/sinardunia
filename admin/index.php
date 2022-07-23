@@ -67,8 +67,6 @@ $itungtrans3 = $itungtrans2['jumlahtrans'];
                                 <a href="javascript:void(0)" aria-expanded="true"><i class="ti-layout"></i><span>Kelola Toko
                                     </span></a>
                                 <ul class="collapse">
-                                    <li><a href="jenis.php">Jenis</a></li>
-                                    <li><a href="kriteria.php">Kriteria</a></li>
                                     <li><a href="kategori.php">Kategori</a></li>
                                     <li><a href="produk.php">Produk</a></li>
                                     <li><a href="pembayaran.php">Metode Pembayaran</a></li>
@@ -185,9 +183,6 @@ $itungtrans3 = $itungtrans2['jumlahtrans'];
                     </div>
                 </div>
 
-
-
-
                 <div class="row mt-5 mb-5">
                     <div class="col-12">
                         <div class="card">
@@ -198,7 +193,7 @@ $itungtrans3 = $itungtrans2['jumlahtrans'];
                                 <div class="market-status-table mt-4">
                                     Anda masuk sebagai <strong><?= $_SESSION['name'] ?></strong>
                                     <br>
-                                    <p>Pada halaman admin, Anda dapat menambah kriteria produk, mengelola produk,
+                                    <p>Pada halaman admin, Anda dapat menambah kategori produk, mengelola produk,
                                         mengelola user dan admin, melihat konfirmasi pembayaran</p>
                                 </div>
                             </div>
@@ -206,14 +201,8 @@ $itungtrans3 = $itungtrans2['jumlahtrans'];
                     </div>
                 </div>
 
-
-
             </div>
         </div>
-
-
-
-
 
         <footer>
             <div class="footer-area">
@@ -224,7 +213,7 @@ $itungtrans3 = $itungtrans2['jumlahtrans'];
     </div>
 
 
-<!-- 
+    <!-- 
     <script src="assets/js/vendor/jquery-2.2.4.min.js"></script> -->
 
     <script src="assets/js/popper.min.js"></script>

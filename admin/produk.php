@@ -5,7 +5,6 @@ include '../dbconnect.php';
 if (isset($_POST["addproduct"])) {
 	$namaproduk = $_POST['namaproduk'];
 	$idkategori = $_POST['idkategori'];
-	$idkategori = $_POST['idkategori'];
 	$deskripsi = $_POST['deskripsi'];
 	$rate = $_POST['rate'];
 	$hargabefore = $_POST['hargabefore'];
@@ -25,8 +24,8 @@ if (isset($_POST["addproduct"])) {
 		if ($ukuran_file <= 5000000) {
 			if (move_uploaded_file($tmp_file, $path)) {
 
-				$query = "INSERT INTO produk (idkategori, idkategori, namaproduk, gambar, deskripsi, rate, hargabefore, hargaafter, stok)
-			  values('$idkategori','$idkategori','$namaproduk','$pathdb','$deskripsi','$rate','$hargabefore','$hargaafter','$stok')";
+				$query = "INSERT INTO produk (idkategori, namaproduk, gambar, deskripsi, rate, hargabefore, hargaafter, stok)
+			  values('$idkategori','$namaproduk','$pathdb','$deskripsi','$rate','$hargabefore','$hargaafter','$stok')";
 				$sql = mysqli_query($conn, $query); // Eksekusi/ Jalankan query dari variabel $query
 
 				if ($sql) {
@@ -56,7 +55,6 @@ if (isset($_POST["addproduct"])) {
 	$idproduk = $_POST['idproduk'];
 	$namaproduk = $_POST['namaproduk'];
 	$idkategori = $_POST['idkategori'];
-	$idkategori = $_POST['idkategori'];
 	$deskripsi = $_POST['deskripsi'];
 	$rate = $_POST['rate'];
 	$hargabefore = $_POST['hargabefore'];
@@ -81,7 +79,7 @@ if (isset($_POST["addproduct"])) {
 					// values('$idkategori','$idkategori','$namaproduk','$pathdb','$deskripsi','$rate','$hargabefore','$hargaafter')";
 					// $sql = mysqli_query($conn, $query); // Eksekusi/ Jalankan query dari variabel $query
 
-					$sql = mysqli_query($conn, "UPDATE produk SET namaproduk='$namaproduk', idkategori='$idkategori', idkategori='$idkategori', deskripsi='$deskripsi', rate='$rate', hargabefore='$hargabefore', hargaafter='$hargaafter', stok='$stok' , gambar='$pathdb' WHERE idproduk='$idproduk'") or die(mysqli_error($conn)());
+					$sql = mysqli_query($conn, "UPDATE produk SET namaproduk='$namaproduk', idkategori='$idkategori', deskripsi='$deskripsi', rate='$rate', hargabefore='$hargabefore', hargaafter='$hargaafter', stok='$stok' , gambar='$pathdb' WHERE idproduk='$idproduk'") or die(mysqli_error($conn)());
 					if ($sql) {
 						echo "<br><meta http-equiv='refresh' content='3; URL=produk.php'> You will be redirected to the form in 3 seconds";
 					} else {
@@ -105,7 +103,7 @@ if (isset($_POST["addproduct"])) {
 			echo "<br><meta http-equiv='refresh' content='3; URL=produk.php'> You will be redirected to the form in 3 seconds";
 		}
 	} else {
-		$sql = mysqli_query($conn, "UPDATE produk SET namaproduk='$namaproduk', idkategori='$idkategori', idkategori='$idkategori', deskripsi='$deskripsi', rate='$rate', hargabefore='$hargabefore', hargaafter='$hargaafter', stok='$stok' WHERE idproduk='$idproduk'") or die(mysqli_error($conn)());
+		$sql = mysqli_query($conn, "UPDATE produk SET namaproduk='$namaproduk', idkategori='$idkategori', deskripsi='$deskripsi', rate='$rate', hargabefore='$hargabefore', hargaafter='$hargaafter', stok='$stok' WHERE idproduk='$idproduk'") or die(mysqli_error($conn)());
 		if ($sql) {
 			echo "<br><meta http-equiv='refresh' content='3; URL=produk.php'> You will be redirected to the form in 3 seconds";
 		} else {
@@ -176,8 +174,6 @@ if (isset($_POST["addproduct"])) {
 								<a href="javascript:void(0)" aria-expanded="true"><i class="ti-layout"></i><span>Kelola Toko
 									</span></a>
 								<ul class="collapse">
-									<li><a href="jenis.php">Jenis</a></li>
-									<li><a href="kriteria.php">Kriteria</a></li>
 									<li><a href="kategori.php">Kategori</a></li>
 									<li class="active"><a href="produk.php">Produk</a></li>
 									<li><a href="pembayaran.php">Metode Pembayaran</a></li>
@@ -277,19 +273,6 @@ if (isset($_POST["addproduct"])) {
 												</select>
 											</div>
 											<div class="form-group">
-												<label>Nama Jenis</label>
-												<select name="idkategori" class="form-control">
-													<?php
-													$det = mysqli_query($conn, "SELECT * FROM kategori ORDER BY namakategori ASC") or die(mysqli_error($conn)());
-													while ($d = mysqli_fetch_array($det)) {
-													?>
-														<option value="<?= $d['idkategori'] ?>" <?= $d['idkategori'] == $produk['idkategori'] ? 'selected' : '' ?>><?= $d['namakategori'] ?></option>
-													<?php
-													}
-													?>
-												</select>
-											</div>
-											<div class="form-group">
 												<label>Deskripsi</label>
 												<input name="deskripsi" type="text" class="form-control" required value="<?= $produk['deskripsi'] ?>">
 											</div>
@@ -346,8 +329,7 @@ if (isset($_POST["addproduct"])) {
 											<th>No.</th>
 											<th>Gambar</th>
 											<th>Nama Produk</th>
-											<th>Jenis</th>
-											<th>Merek</th>
+											<th>Ketegori</th>
 											<th>Deskripsi</th>
 											<th>Rate</th>
 											<th>Harga Diskon</th>
@@ -358,7 +340,7 @@ if (isset($_POST["addproduct"])) {
 									</thead>
 									<tbody>
 										<?php
-										$brgs = mysqli_query($conn, "SELECT * FROM kategori j, kategori a, produk p WHERE a.idkategori=p.idkategori and j.idkategori=p.idkategori ORDER BY idproduk ASC");
+										$brgs = mysqli_query($conn, "SELECT * FROM kategori a, produk p WHERE a.idkategori=p.idkategori ORDER BY idproduk ASC");
 										$no = 1;
 										while ($p = mysqli_fetch_array($brgs)) { ?>
 											<tr>
@@ -366,13 +348,12 @@ if (isset($_POST["addproduct"])) {
 												<td><img src="../<?= $p['gambar'] ?>" width="50%" \></td>
 												<td><?= $p['namaproduk'] ?></td>
 												<td><?= $p['namakategori'] ?></td>
-												<td><?= $p['namakategori'] ?></td>
 												<td><?= $p['deskripsi'] ?></td>
 												<td><?= $p['rate'] ?></td>
 												<td><?= $p['hargaafter'] ?></td>
 												<td><?= $p['hargabefore'] ?></td>
 												<td><?= $p['stok'] ?></td>
-												<td>
+												<td style="width: 15%;">
 													<a href="produk.php?p=edit&id=<?= $p['idproduk'] ?>" class="btn btn-success">Edit</a>
 													<button onclick="confirm('Apakah Anda Yakin Ingin Mendelete Daftar Produk <?= $p['namaproduk'] ?>') == true ? window.location='produk.php?p=delete&id=<?= $p['idproduk'] ?>' : false" class="btn btn-danger">Hapus</button>
 												</td>
@@ -416,19 +397,6 @@ if (isset($_POST["addproduct"])) {
 						</div>
 						<div class="form-group">
 							<label>Nama Kategori</label>
-							<select name="idkategori" class="form-control">
-								<?php
-								$det = mysqli_query($conn, "SELECT * FROM kategori ORDER BY namakategori ASC") or die(mysqli_error($conn)());
-								while ($d = mysqli_fetch_array($det)) {
-								?>
-									<option value="<?= $d['idkategori'] ?>"><?= $d['namakategori'] ?></option>
-								<?php
-								}
-								?>
-							</select>
-						</div>
-						<div class="form-group">
-							<label>Nama Jenis</label>
 							<select name="idkategori" class="form-control">
 								<?php
 								$det = mysqli_query($conn, "SELECT * FROM kategori ORDER BY namakategori ASC") or die(mysqli_error($conn)());

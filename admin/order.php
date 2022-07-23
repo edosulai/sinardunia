@@ -106,8 +106,6 @@ if (isset($_POST['selesai'])) {
 								<a href="javascript:void(0)" aria-expanded="true"><i class="ti-layout"></i><span>Kelola Toko
 									</span></a>
 								<ul class="collapse">
-									<li><a href="jenis.php">Jenis</a></li>
-									<li><a href="kriteria.php">Kriteria</a></li>
 									<li><a href="produk.php">Produk</a></li>
 									<li><a href="pembayaran.php">Metode Pembayaran</a></li>
 								</ul>

@@ -7,7 +7,7 @@ if (!isset($_SESSION['log'])) {
 } else {
 };
 
-$uid = $_SESSION['id'];
+$uid = @$_SESSION['id'];
 $caricart = mysqli_query($conn, "SELECT * FROM cart WHERE userid='$uid' and status='Cart'");
 $fetc = mysqli_fetch_array($caricart);
 $orderidd = @$fetc['orderid'];
@@ -98,14 +98,14 @@ if (isset($_POST["update"])) {
 					';
 					} else {
 
-						if ($_SESSION['role'] == 'Member') {
+						if (@$_SESSION['role'] == 'Member') {
 							echo '
-					<li style="color:white">Halo, ' . $_SESSION["name"] . '
+					<li style="color:white">Halo, ' . @$_SESSION["name"] . '
 					<li><a href="logout.php">Keluar?</a></li>
 					';
 						} else {
 							echo '
-					<li style="color:white">Halo, ' . $_SESSION["name"] . '
+					<li style="color:white">Halo, ' . @$_SESSION["name"] . '
 					<li><a href="admin">Admin Panel</a></li>
 					<li><a href="logout.php">Keluar?</a></li>
 					';
@@ -171,7 +171,7 @@ if (isset($_POST["update"])) {
 								<div class="row">
 									<div class="multi-gd-img">
 										<ul class="multi-column-dropdown">
-											<h6>Kriteria</h6>
+											<h6>Kategori</h6>
 											<?php
 											$kat = mysqli_query($conn, "SELECT * FROM kategori ORDER BY namakategori ASC");
 											while ($p = mysqli_fetch_array($kat)) { ?>

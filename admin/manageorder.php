@@ -63,8 +63,6 @@ date_default_timezone_set("Asia/Bangkok");
                                 <a href="javascript:void(0)" aria-expanded="true"><i class="ti-layout"></i><span>Kelola Toko
                                     </span></a>
                                 <ul class="collapse">
-                                    <li><a href="jenis.php">Jenis</a></li>
-                                    <li><a href="kriteria.php">Kriteria</a></li>
                                     <li><a href="kategori.php">Kategori</a></li>
                                     <li><a href="produk.php">Produk</a></li>
                                     <li><a href="pembayaran.php">Metode Pembayaran</a></li>
@@ -233,8 +231,8 @@ date_default_timezone_set("Asia/Bangkok");
                             <input name="nama" type="text" class="form-control" placeholder="Nama Barang" required>
                         </div>
                         <div class="form-group">
-                            <label>Jenis</label>
-                            <input name="jenis" type="text" class="form-control" placeholder="Jenis / Kriteria Barang">
+                            <label>Kategori</label>
+                            <input name="jenis" type="text" class="form-control" placeholder="Jenis / Kategori Barang">
                         </div>
                         <div class="form-group">
                             <label>Stock</label>
