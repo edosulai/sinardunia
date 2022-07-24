@@ -56,7 +56,7 @@ if (isset($_POST['confirm'])) {
 
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-	<meta name="keywords" content="Sinardunia, Alex's Dev" />
+	<meta name="keywords" content="Sinardunia, Adam's Dev" />
 	<script type="application/x-javascript">
 		addEventListener("load", function() {
 			setTimeout(hideURLbar, 0);
@@ -232,7 +232,6 @@ if (isset($_POST['confirm'])) {
 
 						<?php
 						$metode = mysqli_query($conn, "SELECT * FROM pembayaran");
-
 						while ($a = mysqli_fetch_array($metode)) {
 						?>
 							<option value="<?= $a['metode'] ?>"><?= $a['metode'] ?> | <?= $a['norek'] ?></option>
@@ -281,7 +280,7 @@ if (isset($_POST['confirm'])) {
 		<div class="footer-copy">
 
 			<div class="container">
-				<p>© 2022 Alex's Dev. All rights reserved</p>
+				<p>© 2022 Adam's Dev. All rights reserved</p>
 			</div>
 		</div>
 

@@ -4,8 +4,6 @@ $conn = mysqli_connect("localhost","root","","sinardunia");
 
 if(!$conn){
 	echo "gagal konek database menn";
-} else {
-	
-};
+}
 
 ?>

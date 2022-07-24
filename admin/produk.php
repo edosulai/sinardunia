@@ -10,6 +10,7 @@ if (isset($_POST["addproduct"])) {
 	$hargabefore = $_POST['hargabefore'];
 	$hargaafter = $_POST['hargaafter'];
 	$stok = $_POST['stok'];
+	$ukuran = $_POST['ukuran'];
 
 	$nama_file = $_FILES['uploadgambar']['name'];
 	$ext = pathinfo($nama_file, PATHINFO_EXTENSION);
@@ -24,8 +25,8 @@ if (isset($_POST["addproduct"])) {
 		if ($ukuran_file <= 5000000) {
 			if (move_uploaded_file($tmp_file, $path)) {
 
-				$query = "INSERT INTO produk (idkategori, namaproduk, gambar, deskripsi, rate, hargabefore, hargaafter, stok)
-			  values('$idkategori','$namaproduk','$pathdb','$deskripsi','$rate','$hargabefore','$hargaafter','$stok')";
+				$query = "INSERT INTO produk (idkategori, namaproduk, gambar, deskripsi, rate, hargabefore, hargaafter, stok, ukuran)
+			  values('$idkategori','$namaproduk','$pathdb','$deskripsi','$rate','$hargabefore','$hargaafter','$stok','$ukuran')";
 				$sql = mysqli_query($conn, $query); // Eksekusi/ Jalankan query dari variabel $query
 
 				if ($sql) {
@@ -60,6 +61,7 @@ if (isset($_POST["addproduct"])) {
 	$hargabefore = $_POST['hargabefore'];
 	$hargaafter = $_POST['hargaafter'];
 	$stok = $_POST['stok'];
+	$ukuran = $_POST['ukuran'];
 
 	if (strlen($_FILES['uploadgambar']['name']) > 0) {
 		$nama_file = $_FILES['uploadgambar']['name'];
@@ -79,7 +81,7 @@ if (isset($_POST["addproduct"])) {
 					// values('$idkategori','$idkategori','$namaproduk','$pathdb','$deskripsi','$rate','$hargabefore','$hargaafter')";
 					// $sql = mysqli_query($conn, $query); // Eksekusi/ Jalankan query dari variabel $query
 
-					$sql = mysqli_query($conn, "UPDATE produk SET namaproduk='$namaproduk', idkategori='$idkategori', deskripsi='$deskripsi', rate='$rate', hargabefore='$hargabefore', hargaafter='$hargaafter', stok='$stok' , gambar='$pathdb' WHERE idproduk='$idproduk'") or die(mysqli_error($conn)());
+					$sql = mysqli_query($conn, "UPDATE produk SET namaproduk='$namaproduk', idkategori='$idkategori', deskripsi='$deskripsi', rate='$rate', hargabefore='$hargabefore', hargaafter='$hargaafter', stok='$stok', ukuran='$ukuran' , gambar='$pathdb' WHERE idproduk='$idproduk'") or die(mysqli_error($conn)());
 					if ($sql) {
 						echo "<br><meta http-equiv='refresh' content='3; URL=produk.php'> You will be redirected to the form in 3 seconds";
 					} else {
@@ -181,6 +183,7 @@ if (isset($_POST["addproduct"])) {
 							</li>
 							<li><a href="customer.php"><span>Kelola Pelanggan</span></a></li>
 							<li><a href="user.php"><span>Kelola Staff</span></a></li>
+							<li><a href="data.php"><span>C.45 - Data</span></a></li>
 							<li>
 								<a href="../logout.php"><span>Logout</span></a>
 
@@ -247,7 +250,7 @@ if (isset($_POST["addproduct"])) {
 							<div class="card">
 								<div class="card-body">
 									<div class="d-sm-flex justify-content-between align-items-center">
-										<h2>Edit Produk</h2>
+										<h2>Kelola Produk</h2>
 									</div>
 
 									<div>
@@ -270,6 +273,13 @@ if (isset($_POST["addproduct"])) {
 													<?php
 													}
 													?>
+												</select>
+											</div>
+											<div class="form-group">
+												<label>Ukuran</label>
+												<select name="ukuran" class="form-control">
+													<option value="besar" <?= $produk['ukuran'] == 'besar' ? 'selected' : '' ?>>Besar</option>
+													<option value="kecil" <?= $produk['ukuran'] == 'kecil' ? 'selected' : '' ?>>Kecil</option>
 												</select>
 											</div>
 											<div class="form-group">
@@ -374,7 +384,7 @@ if (isset($_POST["addproduct"])) {
 
 	<footer>
 		<div class="footer-area">
-			<p>By Alex's Dev</p>
+			<p>By Adam's Dev</p>
 		</div>
 	</footer>
 
@@ -406,6 +416,13 @@ if (isset($_POST["addproduct"])) {
 								<?php
 								}
 								?>
+							</select>
+						</div>
+						<div class="form-group">
+							<label>Ukuran</label>
+							<select name="ukuran" class="form-control">
+								<option value="besar">Besar</option>
+								<option value="kecil">Kecil</option>
 							</select>
 						</div>
 						<div class="form-group">

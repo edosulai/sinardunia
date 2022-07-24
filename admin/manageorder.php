@@ -70,6 +70,7 @@ date_default_timezone_set("Asia/Bangkok");
                             </li>
                             <li><a href="customer.php"><span>Kelola Pelanggan</span></a></li>
                             <li><a href="user.php"><span>Kelola Staff</span></a></li>
+                            <li><a href="data.php"><span>C.45 - Data</span></a></li>
                             <li>
                                 <a href="../logout.php"><span>Logout</span></a>
 
@@ -210,7 +211,7 @@ date_default_timezone_set("Asia/Bangkok");
 
     <footer>
         <div class="footer-area">
-            <p>By Alex's Dev</p>
+            <p>By Adam's Dev</p>
         </div>
     </footer>
 

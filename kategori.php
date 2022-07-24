@@ -12,7 +12,7 @@ $idk = $_GET['id'];
 
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-	<meta name="keywords" content="Sinardunia, Alex's Dev" />
+	<meta name="keywords" content="Sinardunia, Adam's Dev" />
 	<script type="application/x-javascript">
 		addEventListener("load", function() {
 			setTimeout(hideURLbar, 0);
@@ -260,7 +260,7 @@ $idk = $_GET['id'];
 		<div class="footer-copy">
 
 			<div class="container">
-				<p>© 2022 Alex's Dev. All rights reserved</p>
+				<p>© 2022 Adam's Dev. All rights reserved</p>
 			</div>
 		</div>
 

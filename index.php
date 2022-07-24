@@ -281,7 +281,7 @@ include 'dbconnect.php';
 			<div class="footer-copy">
 
 				<div class="container">
-					<p>© 2022 Alex's Dev. All rights reserved</p>
+					<p>© 2022 Adam's Dev. All rights reserved</p>
 				</div>
 			</div>
 

@@ -74,7 +74,7 @@ $itungtrans3 = $itungtrans2['jumlahtrans'];
                             </li>
                             <li><a href="customer.php"><span>Kelola Pelanggan</span></a></li>
                             <li><a href="user.php"><span>Kelola Staff</span></a></li>
-                            <li><a href="c45.php"><span>C.45 - Data</span></a></li>
+                            <li><a href="data.php"><span>C.45 - Data</span></a></li>
                             <li>
                                 <a href="../logout.php"><span>Logout</span></a>
 
@@ -207,7 +207,7 @@ $itungtrans3 = $itungtrans2['jumlahtrans'];
 
         <footer>
             <div class="footer-area">
-                <p>by Alex's Dev</p>
+                <p>by Adam's Dev</p>
             </div>
         </footer>
 

@@ -199,7 +199,7 @@ if (isset($_POST['addmethod'])) {
 
     <footer>
         <div class="footer-area">
-            <p>By Alex's Dev</p>
+            <p>By Adam's Dev</p>
         </div>
     </footer>
 
