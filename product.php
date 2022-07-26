@@ -260,7 +260,7 @@ if (isset($_POST['addprod'])) {
 					<img id="example" src="<?= $p['gambar'] ?>" alt=" " class="img-responsive">
 				</div>
 				<div class="col-md-8 agileinfo_single_right">
-					<h2 ><?= $p['namaproduk'] ?></h2>
+					<h2><?= $p['namaproduk'] ?></h2>
 					<!-- <div class="rating1">
 						<span class="starRating">
 							<?php
@@ -275,7 +275,7 @@ if (isset($_POST['addprod'])) {
 					</div> -->
 					<p>Stok : <?= $p['stok'] ?></p>
 					<div class="w3agile_description">
-						<h4 >Deskripsi :</h4>
+						<h4>Deskripsi :</h4>
 						<p><?= $p['deskripsi'] ?></p>
 					</div>
 					<div class="snipcart-item block">
