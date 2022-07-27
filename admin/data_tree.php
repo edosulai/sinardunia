@@ -147,7 +147,7 @@ if ($sql) {
 }
 
 //harga mahal
-$sql = mysqli_query($conn, "SELECT * FROM produk WHERE harga >= 20000");
+$sql = mysqli_query($conn, "SELECT * FROM produk WHERE hargaafter >= 20000");
 $hrgmahallaris = 0;
 $hrgmahalkurang = 0;
 $hrgmahal = 0;
@@ -167,7 +167,7 @@ if ($sql) {
 
 
 //harga murah
-$sql = mysqli_query($conn, "SELECT * FROM produk WHERE harga < 20000");
+$sql = mysqli_query($conn, "SELECT * FROM produk WHERE hargaafter < 20000");
 $hrgmurahlaris = 0;
 $hrgmurahkurang = 0;
 $hrgmurah = 0;

@@ -33,7 +33,7 @@ CREATE TABLE `cart` (
   `userid` int NOT NULL,
   `tglorder` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `status` varchar(10) NOT NULL DEFAULT 'Cart'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data untuk tabel `cart`
@@ -53,7 +53,7 @@ CREATE TABLE `detailorder` (
   `orderid` varchar(100) NOT NULL,
   `idproduk` int NOT NULL,
   `qty` int NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data untuk tabel `detailorder`
@@ -71,7 +71,7 @@ INSERT INTO `detailorder` (`detailid`, `orderid`, `idproduk`, `qty`) VALUES
 CREATE TABLE `kategori` (
   `idkategori` int NOT NULL,
   `namakategori` varchar(20) DEFAULT 'NULL'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data untuk tabel `kategori`
@@ -96,7 +96,7 @@ CREATE TABLE `konfirmasi` (
   `namarekening` varchar(25) NOT NULL,
   `tglbayar` date NOT NULL,
   `tglsubmit` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data untuk tabel `konfirmasi`
@@ -121,7 +121,7 @@ CREATE TABLE `login` (
   `tgljoin` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `role` varchar(7) NOT NULL DEFAULT 'Member',
   `lastlogin` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data untuk tabel `login`
@@ -142,16 +142,16 @@ CREATE TABLE `pembayaran` (
   `norek` varchar(25) NOT NULL,
   `logo` text,
   `an` varchar(20) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data untuk tabel `pembayaran`
 --
 
 INSERT INTO `pembayaran` (`no`, `metode`, `norek`, `logo`, `an`) VALUES
-(4, 'GOPAY', '+6289637739631', 'images/gopay.jpg', 'GOPAY AL'),
-(5, 'Bank BCA', '123123123', 'images/bca.jpg', 'BCA ASD'),
-(6, 'DANA', '+6289637739631', 'images/dana.png', 'DANA AL');
+(4, 'GOPAY', '+6210070030', 'images/gopay.jpg', 'GOPAY AL'),
+(5, 'Bank BCA', '4523141', 'images/bca.jpg', 'BCA ASD'),
+(6, 'DANA', '+6279612321', 'images/dana.png', 'DANA AL');
 
 -- --------------------------------------------------------
 
@@ -170,7 +170,7 @@ CREATE TABLE `produk` (
   `hargaafter` int DEFAULT NULL,
   `stok` int DEFAULT NULL,
   `ukuran` varchar(100) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data untuk tabel `produk`

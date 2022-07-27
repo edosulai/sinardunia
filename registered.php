@@ -100,7 +100,7 @@ if (isset($_POST['adduser'])) {
 		</div>
 	</div>
 
-	<div class="logo_products">
+	<!-- <div class="logo_products">
 		<div class="container">
 			<div class="w3ls_logo_products_left1">
 				<ul class="phone_email">
@@ -122,7 +122,7 @@ if (isset($_POST['adduser'])) {
 
 			<div class="clearfix"> </div>
 		</div>
-	</div>
+	</div> -->
 
 
 	<div class="navigation-agileits">
@@ -208,9 +208,9 @@ if (isset($_POST['adduser'])) {
 					<h3>Hubungi Kami</h3>
 
 					<ul class="address">
-						<li><i class="glyphicon glyphicon-map-marker" aria-hidden="true"></i>Jl. Jala Utama 4 Blok G No. 1</li>
-						<li><i class="glyphicon glyphicon-envelope" aria-hidden="true"></i><a href="mailto:assandro843@gmail.com">assandro843@gmail.com</a></li>
-						<li><i class="glyphicon glyphicon-earphone" aria-hidden="true"></i>(+62) 896 3773 9631</li>
+					<li><i class="glyphicon glyphicon-map-marker" aria-hidden="true"></i>Jl.Batu Ampar III Condet Jakarta Timur Kecamatan Kramat Jati RT.6 RW.3</li>
+						<li><i class="glyphicon glyphicon-envelope" aria-hidden="true"></i><a href="fikriadam12321@gmail.com">fikriadam12321@gmail.com</a></li>
+						<li><i class="glyphicon glyphicon-earphone" aria-hidden="true"></i>(+62) 85810061300</li>
 					</ul>
 				</div>
 				<div class="col-md-3 w3_footer_grid">
