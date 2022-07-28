@@ -355,8 +355,7 @@ if ($sql) {
                                                 <div class="text-right">
                                                     <h2>
                                                         <small>
-                                                            <a href="?page=c45/data_output" class="btn btn-danger">Kembali</a>
-                                                            <a href="?page=c45/data_node" class="btn btn-primary">Perhitungan Node</a>
+                                                            <a href="data_output.php" class="btn btn-danger">Kembali</a>
                                                         </small>
                                                     </h2>
                                                     <ul class="nav navbar-right panel_toolbox">

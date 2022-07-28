@@ -132,6 +132,41 @@ include '../dbconnect.php';
                     <div class="col-12">
                         <div class="card">
                             <div class="card-body">
+                                <div>
+                                    <!-- <code>IF (TERJUAL = BANYAK) THEN <i>LARIS</i></code>
+                                    <br>
+                                    <code>IF (TERJUAL = SEDIKIT) AND (STOK = BANYAK) AND (HARGA = MAHAL) THEN <i>TIDAK LARIS</i></code>
+                                    <br>
+                                    <code>IF (TERJUAL = SEDIKIT) AND (STOK = BANYAK) AND (HARGA = MURAH) THEN <i>LARIS</i></code>
+                                    <br>
+                                    <code>IF (TERJUAL = SEDIKIT) AND (STOK = SEDIKIT) THEN <i>TIDAK LARIS</i></code> -->
+
+                                    <code>IF terjual == banyak AND stok == banyak AND harga == mahal AND ukuran == besar THEN keputusan = Laris</code><br>
+                                    <code>IF terjual == banyak AND stok == banyak AND harga == mahal AND ukuran == kecil THEN keputusan = Laris</code><br>
+                                    <code>IF terjual == banyak AND stok == banyak AND harga == murah AND ukuran == besar THEN keputusan = Laris</code><br>
+                                    <code>IF terjual == banyak AND stok == banyak AND harga == murah AND ukuran == kecil THEN keputusan = Laris</code><br>
+                                    <code>IF terjual == banyak AND stok == sedikit AND harga == mahal AND ukuran == besar THEN keputusan = Laris</code><br>
+                                    <code>IF terjual == banyak AND stok == sedikit AND harga == mahal AND ukuran == kecil THEN keputusan = Laris</code><br>
+                                    <code>IF terjual == banyak AND stok == sedikit AND harga == murah AND ukuran == besar THEN keputusan = Laris</code><br>
+                                    <code>IF terjual == banyak AND stok == sedikit AND harga == murah AND ukuran == kecil THEN keputusan = Laris</code><br>
+                                    <code>IF terjual == sedikit AND stok == banyak AND harga == mahal AND ukuran == besar THEN keputusan = Kurang Laris</code><br>
+                                    <code>IF terjual == sedikit AND stok == banyak AND harga == mahal AND ukuran == kecil THEN keputusan = Kurang Laris</code><br>
+                                    <code>IF terjual == sedikit AND stok == banyak AND harga == murah AND ukuran == besar THEN keputusan = Kurang Laris</code><br>
+                                    <code>IF terjual == sedikit AND stok == banyak AND harga == murah AND ukuran == kecil THEN keputusan = Kurang Laris</code><br>
+                                    <code>IF terjual == sedikit AND stok == sedikit AND harga == mahal AND ukuran == besar THEN keputusan = Kurang Laris</code><br>
+                                    <code>IF terjual == sedikit AND stok == sedikit AND harga == mahal AND ukuran == kecil THEN keputusan = Kurang Laris</code><br>
+                                    <code>IF terjual == sedikit AND stok == sedikit AND harga == murah AND ukuran == besar THEN keputusan = Kurang Laris</code><br>
+                                    <code>IF terjual == sedikit AND stok == sedikit AND harga == murah AND ukuran == kecil THEN keputusan = Kurang Laris</code><br>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row mt-5 mb-5">
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-body">
                                 <div class="">
                                     <div class="page-title">
                                         <div class="title_left">
@@ -148,7 +183,6 @@ include '../dbconnect.php';
                                                     <h2>
                                                         <small>
                                                             <a href="data_tree.php" class="btn btn-success">Pohon Keputusan</a>
-                                                            <a href="?page=c45/data_node" class="btn btn-primary">Perhitungan Node</a>
                                                         </small>
                                                     </h2>
                                                     <ul class="nav navbar-right panel_toolbox">
@@ -164,10 +198,10 @@ include '../dbconnect.php';
                                                                         <tr>
                                                                             <th>Nomor</th>
                                                                             <th>Nama Barang</th>
-                                                                            <th>Stok Barang</th>
-                                                                            <th>Jumlah Terjual</th>
                                                                             <th>Harga Barang</th>
                                                                             <th>Ukuran Barang</th>
+                                                                            <th>Stok Barang</th>
+                                                                            <th>Jumlah Terjual</th>
                                                                             <th>Keputusan</th>
                                                                             <!-- <th>Action</th> -->
                                                                         </tr>
@@ -187,9 +221,13 @@ include '../dbconnect.php';
 
                                                                             $sumjumlah =  mysqli_query($conn, "SELECT SUM(qty) as jumlah FROM detailorder WHERE idproduk='$data[idproduk]' GROUP BY idproduk");
                                                                             $jumlahterjual = mysqli_fetch_assoc($sumjumlah);
+                                                                            // echo '<pre>';
+                                                                            // var_dump($jumlahterjual);
+                                                                            // var_dump($jumlahterjual >= 30);
+                                                                            // echo '</pre>';
 
                                                                             // jumlah terjual
-                                                                            if ($jumlahterjual >= 30) {
+                                                                            if ($jumlahterjual['jumlah'] >= 30) {
                                                                                 $terjual = "banyak";
                                                                             } else {
                                                                                 $terjual = "sedikit";
@@ -201,6 +239,16 @@ include '../dbconnect.php';
                                                                             } else {
                                                                                 $harga = "murah";
                                                                             }
+
+                                                                            // if ($terjual == "banyak") {
+                                                                            //     $keputusan = "Laris";
+                                                                            // } else if ($terjual == "sedikit" && $stok == "banyak" && $harga == "mahal") {
+                                                                            //     $keputusan = "Kurang Laris";
+                                                                            // } else if ($terjual == "sedikit" && $stok == "banyak" && $harga == "murah") {
+                                                                            //     $keputusan = "Laris";
+                                                                            // } else if ($terjual == "sedikit" && $stok == "sedikit") {
+                                                                            //     $keputusan = "Kurang Laris";
+                                                                            // }
 
                                                                             // keputusan
                                                                             if ($terjual == "banyak" && $stok == "banyak" && $harga == "mahal" && $data['ukuran'] == "besar") {
@@ -243,10 +291,10 @@ include '../dbconnect.php';
                                                                             <tr>
                                                                                 <td><?php echo $no++ ?></td>
                                                                                 <td><?php echo $data['namaproduk'] ?></td>
-                                                                                <td><?php echo $stok ?></td>
-                                                                                <td><?php echo $terjual ?></td>
                                                                                 <td><?php echo $harga ?></td>
                                                                                 <td><?php echo $data['ukuran'] ?></td>
+                                                                                <td><?php echo $stok ?></td>
+                                                                                <td><?php echo $terjual ?></td>
 
                                                                                 <?php
                                                                                 if ($keputusan == 'Laris') {

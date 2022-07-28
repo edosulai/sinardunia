@@ -14,7 +14,7 @@ if (isset($_POST["addproduct"])) {
 
 	$nama_file = $_FILES['uploadgambar']['name'];
 	$ext = pathinfo($nama_file, PATHINFO_EXTENSION);
-	$random = crypt($nama_file, time());
+	$random = uniqid($nama_file, true);
 	$ukuran_file = $_FILES['uploadgambar']['size'];
 	$tipe_file = $_FILES['uploadgambar']['type'];
 	$tmp_file = $_FILES['uploadgambar']['tmp_name'];
@@ -66,7 +66,7 @@ if (isset($_POST["addproduct"])) {
 	if (strlen($_FILES['uploadgambar']['name']) > 0) {
 		$nama_file = $_FILES['uploadgambar']['name'];
 		$ext = pathinfo($nama_file, PATHINFO_EXTENSION);
-		$random = crypt($nama_file, time());
+		$random = uniqid($nama_file, true);
 		$ukuran_file = $_FILES['uploadgambar']['size'];
 		$tipe_file = $_FILES['uploadgambar']['type'];
 		$tmp_file = $_FILES['uploadgambar']['tmp_name'];
